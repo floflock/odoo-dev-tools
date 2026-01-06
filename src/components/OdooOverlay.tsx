@@ -4,6 +4,7 @@ import type { Settings } from '../services/storage';
 import { storage } from '../services/storage';
 import { odooClient } from '../services/odoo-client';
 import { log } from '../utils/odoo-detector';
+import { t } from '../utils/i18n';
 import '../styles/overlay.scss';
 
 interface Report {
@@ -104,7 +105,7 @@ export function OdooOverlay({ odooInfo, settings }: OdooOverlayProps) {
 
   if (minimized) {
     return (
-      <div className={`odoo-dev-tools-minimized ${positionClass}`} onClick={() => setMinimized(false)} title="Odoo Dev Tools">
+      <div className={`odoo-dev-tools-minimized ${positionClass}`} onClick={() => setMinimized(false)} title={t('extensionName')}>
         <OdooIcon />
       </div>
     );
@@ -113,8 +114,8 @@ export function OdooOverlay({ odooInfo, settings }: OdooOverlayProps) {
   return (
     <div className={`odoo-dev-tools-overlay ${positionClass}`}>
       <div className="overlay-header">
-        <span className="overlay-title">Odoo Dev Tools</span>
-        <button className="minimize-btn" onClick={() => setMinimized(true)} title="Minimize">
+        <span className="overlay-title">{t('extensionName')}</span>
+        <button className="minimize-btn" onClick={() => setMinimized(true)} title={t('minimize')}>
           −
         </button>
       </div>
@@ -124,13 +125,13 @@ export function OdooOverlay({ odooInfo, settings }: OdooOverlayProps) {
           className={`tab-btn ${activeTab === 'info' ? 'active' : ''}`}
           onClick={() => setActiveTab('info')}
         >
-          Info
+          {t('tabInfo')}
         </button>
         <button
           className={`tab-btn ${activeTab === 'reports' ? 'active' : ''}`}
           onClick={() => setActiveTab('reports')}
         >
-          Reports
+          {t('tabReports')}
         </button>
       </div>
 
@@ -138,50 +139,50 @@ export function OdooOverlay({ odooInfo, settings }: OdooOverlayProps) {
         {activeTab === 'info' && (
           <div className="info-panel">
             {!hasAnyInfo ? (
-              <p className="no-info">Loading Odoo info... Try refreshing if this persists.</p>
+              <p className="no-info">{t('loadingOdooInfo')}</p>
             ) : (
               <>
                 <InfoRow
-                  label="Database"
+                  label={t('labelDatabase')}
                   displayValue={databaseDisplay}
                   copyValue={odooInfo.database}
-                  copyMessage="Database copied"
+                  copyMessage={t('copiedDatabase')}
                   onCopy={copyToClipboard}
                   copied={copiedField === 'database'}
                   fieldKey="database"
                 />
                 <InfoRow
-                  label="User"
+                  label={t('labelUser')}
                   displayValue={odooInfo.userName ? `${odooInfo.userName} (ID: ${odooInfo.userId})` : null}
                   copyValue={odooInfo.userId?.toString()}
-                  copyMessage="User ID copied"
+                  copyMessage={t('copiedUserId')}
                   onCopy={copyToClipboard}
                   copied={copiedField === 'user'}
                   fieldKey="user"
                 />
                 <InfoRow
-                  label="Company"
+                  label={t('labelCompany')}
                   displayValue={odooInfo.companyName ? `${odooInfo.companyName} (ID: ${odooInfo.companyId})` : null}
                   copyValue={odooInfo.companyId?.toString()}
-                  copyMessage="Company ID copied"
+                  copyMessage={t('copiedCompanyId')}
                   onCopy={copyToClipboard}
                   copied={copiedField === 'company'}
                   fieldKey="company"
                 />
                 <InfoRow
-                  label="Model"
+                  label={t('labelModel')}
                   displayValue={odooInfo.model}
                   copyValue={odooInfo.model}
-                  copyMessage="Model copied"
+                  copyMessage={t('copiedModel')}
                   onCopy={copyToClipboard}
                   copied={copiedField === 'model'}
                   fieldKey="model"
                 />
                 <InfoRow
-                  label="Record ID"
+                  label={t('labelRecordId')}
                   displayValue={odooInfo.recordId?.toString()}
                   copyValue={odooInfo.recordId?.toString()}
-                  copyMessage="Record ID copied"
+                  copyMessage={t('copiedRecordId')}
                   onCopy={copyToClipboard}
                   copied={copiedField === 'recordid'}
                   fieldKey="recordid"
@@ -194,15 +195,15 @@ export function OdooOverlay({ odooInfo, settings }: OdooOverlayProps) {
                 className={`action-btn ${odooInfo.debugMode ? 'active' : ''}`}
                 onClick={toggleDebugMode}
               >
-                {odooInfo.debugMode ? 'Disable Debug' : 'Enable Debug'}
+                {odooInfo.debugMode ? t('disableDebug') : t('enableDebug')}
               </button>
               <button
                 className={`action-btn danger ${odooInfo.isSuperuser ? 'disabled' : ''}`}
                 onClick={becomeSuperAdmin}
                 disabled={odooInfo.isSuperuser}
-                title={odooInfo.isSuperuser ? 'Already superuser' : 'Become superuser'}
+                title={odooInfo.isSuperuser ? t('alreadySuperuser') : t('becomeSuperuser')}
               >
-                {odooInfo.isSuperuser ? 'Superuser' : 'Turn OdooBot'}
+                {odooInfo.isSuperuser ? t('superuser') : t('turnOdooBot')}
               </button>
             </div>
           </div>
@@ -211,11 +212,11 @@ export function OdooOverlay({ odooInfo, settings }: OdooOverlayProps) {
         {activeTab === 'reports' && (
           <div className="reports-panel">
             {!odooInfo.model ? (
-              <p className="no-data">Navigate to a view to see available reports</p>
+              <p className="no-data">{t('navigateToView')}</p>
             ) : loadingReports ? (
-              <p className="loading">Loading reports...</p>
+              <p className="loading">{t('loadingReports')}</p>
             ) : reports.length === 0 ? (
-              <p className="no-data">No reports available for {odooInfo.model}</p>
+              <p className="no-data">{t('noReportsAvailable', odooInfo.model)}</p>
             ) : (
               <ul className="report-list">
                 {reports.map((report) => (
@@ -230,7 +231,7 @@ export function OdooOverlay({ odooInfo, settings }: OdooOverlayProps) {
                             rel="noopener noreferrer"
                             className="report-link"
                           >
-                            HTML
+                            {t('linkHtml')}
                           </a>
                           <a
                             href={odooClient.getReportPdfUrl(report.report_name, odooInfo.recordId)}
@@ -238,7 +239,7 @@ export function OdooOverlay({ odooInfo, settings }: OdooOverlayProps) {
                             rel="noopener noreferrer"
                             className="report-link"
                           >
-                            PDF
+                            {t('linkPdf')}
                           </a>
                         </>
                       )}
@@ -277,7 +278,7 @@ function InfoRow({ label, displayValue, copyValue, copyMessage, onCopy, copied, 
     <div
       className={`info-row ${copied ? 'copied' : ''}`}
       onClick={handleClick}
-      title={copyValue ? `Click to copy: ${copyValue}` : undefined}
+      title={copyValue ? t('clickToCopy', copyValue) : undefined}
     >
       <span className="info-label">{label}:</span>
       <span className="info-value">{displayValue}</span>

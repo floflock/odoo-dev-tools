@@ -1,0 +1,162 @@
+{
+  "extensionName": {
+    "message": "Odoo Dev Tools",
+    "description": "Name of the extension"
+  },
+  "extensionDescription": {
+    "message": "A Chrome extension that significantly improves the daily workflow of Odoo developers",
+    "description": "Description of the extension"
+  },
+  "loading": {
+    "message": "Loading...",
+    "description": "Loading state text"
+  },
+  "settings": {
+    "message": "Settings",
+    "description": "Settings section header"
+  },
+  "settingAutoDebug": {
+    "message": "Auto-enable debug mode",
+    "description": "Setting label for auto-enabling debug mode"
+  },
+  "settingShowOverlay": {
+    "message": "Show overlay",
+    "description": "Setting label for showing overlay"
+  },
+  "settingOverlayPosition": {
+    "message": "Overlay position",
+    "description": "Setting label for overlay position"
+  },
+  "positionTopLeft": {
+    "message": "Top Left",
+    "description": "Top left position option"
+  },
+  "positionTopRight": {
+    "message": "Top Right",
+    "description": "Top right position option"
+  },
+  "positionBottomLeft": {
+    "message": "Bottom Left",
+    "description": "Bottom left position option"
+  },
+  "positionBottomRight": {
+    "message": "Bottom Right",
+    "description": "Bottom right position option"
+  },
+  "minimize": {
+    "message": "Minimize",
+    "description": "Minimize button tooltip"
+  },
+  "tabInfo": {
+    "message": "Info",
+    "description": "Info tab label"
+  },
+  "tabReports": {
+    "message": "Reports",
+    "description": "Reports tab label"
+  },
+  "loadingOdooInfo": {
+    "message": "Loading Odoo info... Try refreshing if this persists.",
+    "description": "Message shown when Odoo info is loading"
+  },
+  "labelDatabase": {
+    "message": "Database",
+    "description": "Database field label"
+  },
+  "copiedDatabase": {
+    "message": "Database copied",
+    "description": "Message shown when database name is copied"
+  },
+  "labelUser": {
+    "message": "User",
+    "description": "User field label"
+  },
+  "copiedUserId": {
+    "message": "User ID copied",
+    "description": "Message shown when user ID is copied"
+  },
+  "labelCompany": {
+    "message": "Company",
+    "description": "Company field label"
+  },
+  "copiedCompanyId": {
+    "message": "Company ID copied",
+    "description": "Message shown when company ID is copied"
+  },
+  "labelModel": {
+    "message": "Model",
+    "description": "Model field label"
+  },
+  "copiedModel": {
+    "message": "Model copied",
+    "description": "Message shown when model name is copied"
+  },
+  "labelRecordId": {
+    "message": "Record ID",
+    "description": "Record ID field label"
+  },
+  "copiedRecordId": {
+    "message": "Record ID copied",
+    "description": "Message shown when record ID is copied"
+  },
+  "enableDebug": {
+    "message": "Enable Debug",
+    "description": "Button text to enable debug mode"
+  },
+  "disableDebug": {
+    "message": "Disable Debug",
+    "description": "Button text to disable debug mode"
+  },
+  "turnOdooBot": {
+    "message": "Turn OdooBot",
+    "description": "Button text to become superadmin"
+  },
+  "superuser": {
+    "message": "Superuser",
+    "description": "Button text when already superuser"
+  },
+  "becomeSuperuser": {
+    "message": "Become superuser",
+    "description": "Tooltip for becoming superuser"
+  },
+  "alreadySuperuser": {
+    "message": "Already superuser",
+    "description": "Tooltip when already superuser"
+  },
+  "navigateToView": {
+    "message": "Navigate to a view to see available reports",
+    "description": "Message shown when no model is selected"
+  },
+  "loadingReports": {
+    "message": "Loading reports...",
+    "description": "Message shown when reports are loading"
+  },
+  "noReportsAvailable": {
+    "message": "No reports available for $MODEL$",
+    "description": "Message shown when no reports are available for a model",
+    "placeholders": {
+      "model": {
+        "content": "$1",
+        "example": "sale.order"
+      }
+    }
+  },
+  "linkHtml": {
+    "message": "HTML",
+    "description": "Link text for HTML report"
+  },
+  "linkPdf": {
+    "message": "PDF",
+    "description": "Link text for PDF report"
+  },
+  "clickToCopy": {
+    "message": "Click to copy: $VALUE$",
+    "description": "Tooltip for copying field value",
+    "placeholders": {
+      "value": {
+        "content": "$1",
+        "example": "sale.order"
+      }
+    }
+  }
+}

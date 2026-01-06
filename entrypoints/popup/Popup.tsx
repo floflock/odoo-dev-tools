@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { storage, type Settings, defaultSettings } from '../../src/services/storage';
+import { t } from '../../src/utils/i18n';
 import '../../src/styles/popup.scss';
 
 type OverlayPosition = 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
@@ -45,10 +46,10 @@ export function Popup() {
     return (
       <div className="popup-container">
         <div className="popup-header">
-          <span className="popup-title">Odoo Dev Tools</span>
+          <span className="popup-title">{t('extensionName')}</span>
         </div>
         <div className="popup-content">
-          <p>Loading...</p>
+          <p>{t('loading')}</p>
         </div>
       </div>
     );
@@ -57,15 +58,15 @@ export function Popup() {
   return (
     <div className="popup-container">
       <div className="popup-header">
-        <span className="popup-title">Odoo Dev Tools</span>
+        <span className="popup-title">{t('extensionName')}</span>
       </div>
 
       <div className="popup-content">
         <div className="settings-section">
-          <h2>Settings</h2>
+          <h2>{t('settings')}</h2>
 
           <div className="setting-item">
-            <span className="setting-label">Auto-enable debug mode</span>
+            <span className="setting-label">{t('settingAutoDebug')}</span>
             <ToggleSwitch
               id="autoDebug"
               checked={settings.autoDebug}
@@ -74,7 +75,7 @@ export function Popup() {
           </div>
 
           <div className="setting-item">
-            <span className="setting-label">Show overlay</span>
+            <span className="setting-label">{t('settingShowOverlay')}</span>
             <ToggleSwitch
               id="showOverlay"
               checked={settings.showOverlay}
@@ -83,21 +84,21 @@ export function Popup() {
           </div>
 
           <div className="setting-item">
-            <span className="setting-label">Overlay position</span>
+            <span className="setting-label">{t('settingOverlayPosition')}</span>
             <select
               value={settings.overlayPosition}
               onChange={(e) => updateSetting('overlayPosition', e.target.value as OverlayPosition)}
             >
-              <option value="top-left">Top Left</option>
-              <option value="top-right">Top Right</option>
-              <option value="bottom-left">Bottom Left</option>
-              <option value="bottom-right">Bottom Right</option>
+              <option value="top-left">{t('positionTopLeft')}</option>
+              <option value="top-right">{t('positionTopRight')}</option>
+              <option value="bottom-left">{t('positionBottomLeft')}</option>
+              <option value="bottom-right">{t('positionBottomRight')}</option>
             </select>
           </div>
         </div>
 
         <div className="info-section">
-          <p className="version">v1.0.0</p>
+          <p className="version">v1.1.0</p>
         </div>
       </div>
     </div>

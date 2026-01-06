@@ -1,0 +1,162 @@
+{
+  "extensionName": {
+    "message": "Odoo Dev Tools",
+    "description": "Name of the extension"
+  },
+  "extensionDescription": {
+    "message": "Una extensión de Chrome que mejora significativamente el flujo de trabajo diario de los desarrolladores de Odoo",
+    "description": "Description of the extension"
+  },
+  "loading": {
+    "message": "Cargando...",
+    "description": "Loading state text"
+  },
+  "settings": {
+    "message": "Configuración",
+    "description": "Settings section header"
+  },
+  "settingAutoDebug": {
+    "message": "Activar automáticamente el modo de depuración",
+    "description": "Setting label for auto-enabling debug mode"
+  },
+  "settingShowOverlay": {
+    "message": "Mostrar overlay",
+    "description": "Setting label for showing overlay"
+  },
+  "settingOverlayPosition": {
+    "message": "Posición del overlay",
+    "description": "Setting label for overlay position"
+  },
+  "positionTopLeft": {
+    "message": "Arriba a la izquierda",
+    "description": "Top left position option"
+  },
+  "positionTopRight": {
+    "message": "Arriba a la derecha",
+    "description": "Top right position option"
+  },
+  "positionBottomLeft": {
+    "message": "Abajo a la izquierda",
+    "description": "Bottom left position option"
+  },
+  "positionBottomRight": {
+    "message": "Abajo a la derecha",
+    "description": "Bottom right position option"
+  },
+  "minimize": {
+    "message": "Minimizar",
+    "description": "Minimize button tooltip"
+  },
+  "tabInfo": {
+    "message": "Info",
+    "description": "Info tab label"
+  },
+  "tabReports": {
+    "message": "Informes",
+    "description": "Reports tab label"
+  },
+  "loadingOdooInfo": {
+    "message": "Cargando información de Odoo... Intenta actualizar si persiste.",
+    "description": "Message shown when Odoo info is loading"
+  },
+  "labelDatabase": {
+    "message": "Base de datos",
+    "description": "Database field label"
+  },
+  "copiedDatabase": {
+    "message": "Base de datos copiada",
+    "description": "Message shown when database name is copied"
+  },
+  "labelUser": {
+    "message": "Usuario",
+    "description": "User field label"
+  },
+  "copiedUserId": {
+    "message": "ID de usuario copiado",
+    "description": "Message shown when user ID is copied"
+  },
+  "labelCompany": {
+    "message": "Compañía",
+    "description": "Company field label"
+  },
+  "copiedCompanyId": {
+    "message": "ID de compañía copiado",
+    "description": "Message shown when company ID is copied"
+  },
+  "labelModel": {
+    "message": "Modelo",
+    "description": "Model field label"
+  },
+  "copiedModel": {
+    "message": "Modelo copiado",
+    "description": "Message shown when model name is copied"
+  },
+  "labelRecordId": {
+    "message": "ID de registro",
+    "description": "Record ID field label"
+  },
+  "copiedRecordId": {
+    "message": "ID de registro copiado",
+    "description": "Message shown when record ID is copied"
+  },
+  "enableDebug": {
+    "message": "Activar Debug",
+    "description": "Button text to enable debug mode"
+  },
+  "disableDebug": {
+    "message": "Desactivar Debug",
+    "description": "Button text to disable debug mode"
+  },
+  "turnOdooBot": {
+    "message": "Convertirse en OdooBot",
+    "description": "Button text to become superadmin"
+  },
+  "superuser": {
+    "message": "Superusuario",
+    "description": "Button text when already superuser"
+  },
+  "becomeSuperuser": {
+    "message": "Convertirse en superusuario",
+    "description": "Tooltip for becoming superuser"
+  },
+  "alreadySuperuser": {
+    "message": "Ya es superusuario",
+    "description": "Tooltip when already superuser"
+  },
+  "navigateToView": {
+    "message": "Navega a una vista para ver los informes disponibles",
+    "description": "Message shown when no model is selected"
+  },
+  "loadingReports": {
+    "message": "Cargando informes...",
+    "description": "Message shown when reports are loading"
+  },
+  "noReportsAvailable": {
+    "message": "No hay informes disponibles para $MODEL$",
+    "description": "Message shown when no reports are available for a model",
+    "placeholders": {
+      "model": {
+        "content": "$1",
+        "example": "sale.order"
+      }
+    }
+  },
+  "linkHtml": {
+    "message": "HTML",
+    "description": "Link text for HTML report"
+  },
+  "linkPdf": {
+    "message": "PDF",
+    "description": "Link text for PDF report"
+  },
+  "clickToCopy": {
+    "message": "Clic para copiar: $VALUE$",
+    "description": "Tooltip for copying field value",
+    "placeholders": {
+      "value": {
+        "content": "$1",
+        "example": "sale.order"
+      }
+    }
+  }
+}

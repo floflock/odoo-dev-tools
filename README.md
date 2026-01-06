@@ -69,6 +69,18 @@ Instantly become a superadmin user for testing and debugging:
 
 **Use case**: Testing access rights or need to access system-level records? Become superadmin with one click.
 
+### 5. Internationalization (i18n)
+
+Full multilingual support with automatic language detection:
+
+- **Supported languages**: English, German (Deutsch), Italian (Italiano), Spanish (Español), French (Français)
+- **Automatic detection**: Uses your browser's language setting
+- **Complete translation**: All UI elements, labels, messages, and tooltips are translated
+- **Maintainable**: Clean structure with separate translation files for easy updates
+- **Extensible**: New languages can be easily added via the `public/_locales` directory
+
+**Technical details**: The extension uses Chrome's built-in i18n API with translations stored in `messages.json` files. The language is automatically selected based on your browser locale, ensuring consistency with your system preferences.
+
 ## Installation
 
 ### From Source (Development)
@@ -84,7 +96,7 @@ Instantly become a superadmin user for testing and debugging:
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/odoo-dev-tools.git
+   git clone https://github.com/floflock/odoo-dev-tools.git
    cd odoo-dev-tools
    ```
 
@@ -370,6 +382,45 @@ Edit `public/odoo-bridge.js` to change:
 
 **Important**: After modifying `odoo-bridge.js`, reload the extension AND refresh the Odoo page (the bridge script is injected on page load).
 
+#### Adding Translations (i18n)
+
+To add a new translatable string:
+
+1. **Add the key to all language files** in `public/_locales/{lang}/messages.json`:
+   ```json
+   "myNewKey": {
+     "message": "Translated text here",
+     "description": "Description of what this text is for"
+   }
+   ```
+
+2. **Use the translation in your component**:
+   ```typescript
+   import { t } from '../utils/i18n';
+
+   // Simple translation
+   <span>{t('myNewKey')}</span>
+
+   // With placeholder
+   <span>{t('myKeyWithPlaceholder', someValue)}</span>
+   ```
+
+3. **For placeholder support**, define it in messages.json:
+   ```json
+   "myKeyWithPlaceholder": {
+     "message": "Value is: $VALUE$",
+     "description": "Shows a value",
+     "placeholders": {
+       "value": {
+         "content": "$1",
+         "example": "example"
+       }
+     }
+   }
+   ```
+
+**Supported languages**: en (English), de (German), it (Italian), es (Spanish), fr (French)
+
 ### Debugging Tips
 
 #### Console Logs
@@ -494,8 +545,8 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 ## Support
 
-- **Issues**: [GitHub Issues](https://github.com/yourusername/odoo-dev-tools/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/yourusername/odoo-dev-tools/discussions)
+- **Issues**: [GitHub Issues](https://github.com/floflock/odoo-dev-tools/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/floflock/odoo-dev-tools/discussions)
 
 ## Acknowledgments
 
