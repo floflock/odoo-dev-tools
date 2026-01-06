@@ -1,0 +1,149 @@
+@use 'variables' as *;
+
+// Reset body/html for Chrome extension popup
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  width: 300px;
+  background: $light-bg;
+}
+
+.popup-container {
+  width: 300px;
+  background: $light-bg;
+  font-family: $font-family;
+  font-size: 13px;
+  color: $light-text;
+  overflow: hidden;
+}
+
+// Header matching overlay style
+.popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: $odoo-primary;
+  color: #fff;
+}
+
+.popup-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.popup-content {
+  padding: 16px;
+}
+
+.settings-section {
+  h2 {
+    margin: 0 0 12px 0;
+    font-size: 11px;
+    font-weight: 600;
+    color: $light-text-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+}
+
+.setting-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  margin-bottom: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  &:hover {
+    background: $light-bg-secondary;
+  }
+
+  .setting-label {
+    font-size: 13px;
+    color: $light-text;
+  }
+
+  select {
+    padding: 6px 10px;
+    border: 1px solid $light-border;
+    border-radius: 4px;
+    font-size: 12px;
+    font-family: inherit;
+    color: $light-text;
+    background: $light-bg;
+    cursor: pointer;
+
+    &:focus {
+      outline: none;
+      border-color: $odoo-primary;
+    }
+  }
+}
+
+// Toggle switch styles
+.toggle-switch {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  flex-shrink: 0;
+
+  input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+
+    &:checked + .toggle-slider {
+      background-color: $odoo-primary;
+    }
+
+    &:checked + .toggle-slider::before {
+      transform: translateX(20px);
+    }
+
+    &:focus + .toggle-slider {
+      box-shadow: 0 0 0 2px rgba($odoo-primary, 0.2);
+    }
+  }
+
+  .toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: $light-border;
+    transition: 0.2s;
+    border-radius: 24px;
+
+    &::before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: 0.2s;
+      border-radius: 50%;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+  }
+}
+
+.info-section {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid $light-border;
+  text-align: center;
+}
+
+.version {
+  margin: 0;
+  font-size: 11px;
+  color: $light-text-muted;
+}
