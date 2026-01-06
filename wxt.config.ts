@@ -18,7 +18,7 @@ export default defineConfig({
     },
     web_accessible_resources: [
       {
-        resources: ['odoo-bridge.js', 'extension-icon.svg'],
+        resources: ['odoo-bridge.js'],
         matches: ['*://*/*'],
       },
     ],
