@@ -14,6 +14,20 @@ Odoo Dev Tools provides essential development features directly in your browser 
 
 The extension intelligently detects Odoo pages and only activates on the web client (backend), not on public-facing pages like portals or e-commerce sites.
 
+## Screenshots
+
+### Developer Info Overlay
+![Developer Info Overlay](public/screenshots/screenshot-overlay-infos.png)
+*Real-time display of database, user, company, model, and record ID with click-to-copy functionality*
+
+### Reports Access
+![Reports Tab](public/screenshots/screenshot-overlay-reports.png)
+*Quick access to all available reports with HTML and PDF links*
+
+### Extension Settings
+![Settings Popup](public/screenshots/screenshot-settings.png)
+*Configure auto-debug mode, overlay visibility, and position*
+
 ## Features
 
 ### 1. Debug Mode Toggle

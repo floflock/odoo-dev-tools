@@ -10,11 +10,11 @@ export default defineConfig({
     permissions: ['storage', 'activeTab'],
     host_permissions: ['*://*/*'],
     icons: {
-      16: 'icon-16.png',
-      32: 'icon-32.png',
-      48: 'icon-48.png',
-      128: 'icon-128.png',
-      512: 'icon-512.png',
+      16: 'icons/icon-16.png',
+      32: 'icons/icon-32.png',
+      48: 'icons/icon-48.png',
+      128: 'icons/icon-128.png',
+      512: 'icons/icon-512.png',
     },
     web_accessible_resources: [
       {
