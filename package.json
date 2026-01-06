@@ -8,7 +8,7 @@
     "dev:firefox": "wxt -b firefox",
     "build": "wxt build",
     "build:firefox": "wxt build -b firefox",
-    "zip": "wxt zip",
+    "zip": "wxt build && rm -rf .output/chrome-mv3/screenshots .output/chrome-mv3/ICONS.md && cd .output/chrome-mv3 && zip -r ../odoo-dev-tools-1.1.0-chrome.zip . && cd ../..",
     "zip:firefox": "wxt zip -b firefox",
     "postinstall": "wxt prepare"
   },
