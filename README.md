@@ -17,15 +17,15 @@ The extension intelligently detects Odoo pages and only activates on the web cli
 ## Screenshots
 
 ### Developer Info Overlay
-![Developer Info Overlay](public/screenshots/screenshot-overlay-infos.png)
+![Developer Info Overlay](screenshots/screenshot-overlay-infos.png)
 *Real-time display of database, user, company, model, and record ID with click-to-copy functionality*
 
 ### Reports Access
-![Reports Tab](public/screenshots/screenshot-overlay-reports.png)
+![Reports Tab](screenshots/screenshot-overlay-reports.png)
 *Quick access to all available reports with HTML and PDF links*
 
 ### Extension Settings
-![Settings Popup](public/screenshots/screenshot-settings.png)
+![Settings Popup](screenshots/screenshot-settings.png)
 *Configure auto-debug mode, overlay visibility, and position*
 
 ## Features
