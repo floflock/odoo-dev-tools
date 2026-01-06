@@ -14,10 +14,11 @@ export default defineConfig({
       32: 'icon-32.png',
       48: 'icon-48.png',
       128: 'icon-128.png',
+      512: 'icon-512.png',
     },
     web_accessible_resources: [
       {
-        resources: ['odoo-bridge.js'],
+        resources: ['odoo-bridge.js', 'extension-icon.svg'],
         matches: ['*://*/*'],
       },
     ],
