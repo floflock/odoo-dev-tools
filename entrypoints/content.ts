@@ -1,7 +1,7 @@
 import { createRoot } from 'react-dom/client';
 import { createElement } from 'react';
 import { OdooOverlay } from '../src/components/OdooOverlay';
-import { detectOdoo, log } from '../src/utils/odoo-detector';
+import { detectOdoo, log, setDebugEnabled } from '../src/utils/odoo-detector';
 import { storage } from '../src/services/storage';
 import type { OdooInfo } from '../src/utils/odoo-detector';
 
@@ -78,6 +78,9 @@ export default defineContentScript({
     // Get settings early
     const settings = await storage.getSettings();
 
+    // Initialize debug logging based on settings
+    setDebugEnabled(settings.extensionDebug);
+
     // Setup RPC listener IMMEDIATELY (before page loads)
     // This ensures we catch RPC calls that happen during initial page load
     setupRpcListener(settings);
@@ -134,6 +137,10 @@ export default defineContentScript({
     browser.storage.onChanged.addListener((changes, areaName) => {
       if (areaName === 'local' && changes['odoo-dev-tools-settings']) {
         const newSettings = changes['odoo-dev-tools-settings'].newValue;
+
+        // Update debug logging state
+        setDebugEnabled(newSettings.extensionDebug);
+
         log('Settings changed, updating overlay');
 
         // Re-render overlay with new settings

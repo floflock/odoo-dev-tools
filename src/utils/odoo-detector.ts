@@ -7,6 +7,7 @@ export interface OdooInfo {
   userName: string | null;
   companyId: number | null;
   companyName: string | null;
+  lang: string | null;
   model: string | null;
   recordId: number | null;
   debugMode: boolean;
@@ -102,6 +103,13 @@ function parseSessionInfo(session: any): Partial<OdooInfo> {
     }
   }
 
+  // Language (user_context.lang or direct lang field)
+  if (session.user_context?.lang) {
+    info.lang = session.user_context.lang;
+  } else if (session.lang) {
+    info.lang = session.lang;
+  }
+
   return info;
 }
 
@@ -149,6 +157,7 @@ export async function detectOdoo(): Promise<OdooInfo> {
     userName: null,
     companyId: null,
     companyName: null,
+    lang: null,
     model: null,
     recordId: null,
     debugMode: false,
@@ -179,6 +188,7 @@ export async function detectOdoo(): Promise<OdooInfo> {
     if (scriptData.userName) info.userName = scriptData.userName;
     if (scriptData.companyId) info.companyId = scriptData.companyId;
     if (scriptData.companyName) info.companyName = scriptData.companyName;
+    if (scriptData.lang) info.lang = scriptData.lang;
   }
 
   if (!info.isOdoo) {
@@ -302,6 +312,15 @@ function isLocalhost(): boolean {
   return hostname === 'localhost' || hostname === '127.0.0.1';
 }
 
+// Debug logging state - cached for synchronous access
+let debugEnabled = false;
+
+export function setDebugEnabled(enabled: boolean): void {
+  debugEnabled = enabled;
+}
+
 export function log(...args: unknown[]): void {
-  console.log('[Odoo Dev Tools]', ...args);
+  if (debugEnabled) {
+    console.log('[Odoo Dev Tools]', ...args);
+  }
 }

@@ -165,4 +165,24 @@ export const odooClient = {
       return null;
     }
   },
+
+  /**
+   * Set user language
+   */
+  async setUserLanguage(userId: number, lang: string): Promise<boolean> {
+    log('Setting user language:', { userId, lang });
+    try {
+      await jsonRpc('/web/dataset/call_kw', {
+        model: 'res.users',
+        method: 'write',
+        args: [[userId], { lang }],
+        kwargs: {},
+      });
+      log('Language updated successfully');
+      return true;
+    } catch (error) {
+      log('Error setting user language:', error);
+      return false;
+    }
+  },
 };

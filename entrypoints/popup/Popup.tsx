@@ -95,10 +95,19 @@ export function Popup() {
               <option value="bottom-right">{t('positionBottomRight')}</option>
             </select>
           </div>
+
+          <div className="setting-item">
+            <span className="setting-label">{t('settingExtensionDebug')}</span>
+            <ToggleSwitch
+              id="extensionDebug"
+              checked={settings.extensionDebug}
+              onChange={(checked) => updateSetting('extensionDebug', checked)}
+            />
+          </div>
         </div>
 
         <div className="info-section">
-          <p className="version">v1.1.0</p>
+          <p className="version">v1.2.0</p>
         </div>
       </div>
     </div>

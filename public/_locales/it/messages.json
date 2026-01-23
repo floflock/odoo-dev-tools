@@ -158,5 +158,27 @@
         "example": "sale.order"
       }
     }
+  },
+  "labelLanguage": {
+    "message": "Lingua",
+    "description": "Language field label"
+  },
+  "switchToEnglish": {
+    "message": "Passa all'inglese",
+    "description": "Tooltip for switching to English language"
+  },
+  "switchToLocal": {
+    "message": "Passa a $LANG$",
+    "description": "Tooltip for switching to local language",
+    "placeholders": {
+      "lang": {
+        "content": "$1",
+        "example": "de_DE"
+      }
+    }
+  },
+  "settingExtensionDebug": {
+    "message": "Modalità debug estensione",
+    "description": "Setting label for enabling extension debug logging"
   }
 }

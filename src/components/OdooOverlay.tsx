@@ -33,6 +33,8 @@ export function OdooOverlay({ odooInfo, settings }: OdooOverlayProps) {
   const [loadingReports, setLoadingReports] = useState(false);
   const [copiedField, setCopiedField] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<'info' | 'reports'>('info');
+  const [switchingLanguage, setSwitchingLanguage] = useState(false);
+  const [originalLanguage, setOriginalLanguage] = useState<string | null>(settings.originalLanguage);
 
   // Apply dark mode class to root container
   useEffect(() => {
@@ -67,6 +69,15 @@ export function OdooOverlay({ odooInfo, settings }: OdooOverlayProps) {
     storage.updateSettings({ overlayMinimized: minimized });
   }, [minimized]);
 
+  // Store original language on first detection (if not English)
+  useEffect(() => {
+    if (odooInfo.lang && !originalLanguage && odooInfo.lang !== 'en_US') {
+      setOriginalLanguage(odooInfo.lang);
+      storage.updateSettings({ originalLanguage: odooInfo.lang });
+      log('Stored original language:', odooInfo.lang);
+    }
+  }, [odooInfo.lang, originalLanguage]);
+
   const copyToClipboard = useCallback(async (value: string, fieldName: string) => {
     try {
       await navigator.clipboard.writeText(value);
@@ -90,6 +101,27 @@ export function OdooOverlay({ odooInfo, settings }: OdooOverlayProps) {
   const becomeSuperAdmin = useCallback(() => {
     window.location.href = '/web/become';
   }, []);
+
+  const toggleLanguage = useCallback(async () => {
+    if (!odooInfo.userId || !odooInfo.lang || switchingLanguage) return;
+
+    const isCurrentlyEnglish = odooInfo.lang === 'en_US';
+    const targetLang = isCurrentlyEnglish ? (originalLanguage || 'en_US') : 'en_US';
+
+    // Don't switch if we don't have an original language and we're already in English
+    if (isCurrentlyEnglish && !originalLanguage) {
+      log('No original language stored, cannot switch back');
+      return;
+    }
+
+    setSwitchingLanguage(true);
+    const success = await odooClient.setUserLanguage(odooInfo.userId, targetLang);
+    if (success) {
+      window.location.reload();
+    } else {
+      setSwitchingLanguage(false);
+    }
+  }, [odooInfo.userId, odooInfo.lang, originalLanguage, switchingLanguage]);
 
   const positionClass = `overlay-${settings.overlayPosition}`;
 
@@ -160,6 +192,14 @@ export function OdooOverlay({ odooInfo, settings }: OdooOverlayProps) {
                   copied={copiedField === 'user'}
                   fieldKey="user"
                 />
+                {odooInfo.lang && (
+                  <LanguageRow
+                    currentLang={odooInfo.lang}
+                    originalLang={originalLanguage}
+                    onToggle={toggleLanguage}
+                    switching={switchingLanguage}
+                  />
+                )}
                 <InfoRow
                   label={t('labelCompany')}
                   displayValue={odooInfo.companyName ? `${odooInfo.companyName} (ID: ${odooInfo.companyId})` : null}
@@ -283,6 +323,41 @@ function InfoRow({ label, displayValue, copyValue, copyMessage, onCopy, copied, 
       <span className="info-label">{label}:</span>
       <span className="info-value">{displayValue}</span>
       {copied && <span className="copy-badge">{copyMessage}</span>}
+    </div>
+  );
+}
+
+interface LanguageRowProps {
+  currentLang: string;
+  originalLang: string | null;
+  onToggle: () => void;
+  switching: boolean;
+}
+
+function LanguageRow({ currentLang, originalLang, onToggle, switching }: LanguageRowProps) {
+  const isEnglish = currentLang === 'en_US';
+  const canSwitch = isEnglish ? !!originalLang : true;
+  const targetLang = isEnglish ? originalLang : 'en_US';
+
+  return (
+    <div className="info-row language-row">
+      <span className="info-label">{t('labelLanguage')}:</span>
+      <span className="info-value">
+        {currentLang}
+        {canSwitch && (
+          <>
+            {' → '}
+            <button
+              className="lang-toggle-link"
+              onClick={onToggle}
+              disabled={switching}
+              title={isEnglish ? t('switchToLocal', targetLang || '') : t('switchToEnglish')}
+            >
+              {switching ? '...' : targetLang}
+            </button>
+          </>
+        )}
+      </span>
     </div>
   );
 }

@@ -5,6 +5,8 @@ export interface Settings {
   showOverlay: boolean;
   overlayPosition: OverlayPosition;
   overlayMinimized: boolean;
+  originalLanguage: string | null;
+  extensionDebug: boolean;
 }
 
 export const defaultSettings: Settings = {
@@ -12,6 +14,8 @@ export const defaultSettings: Settings = {
   showOverlay: true,
   overlayPosition: 'bottom-right',
   overlayMinimized: false,
+  originalLanguage: null,
+  extensionDebug: false,
 };
 
 const SETTINGS_KEY = 'odoo-dev-tools-settings';
