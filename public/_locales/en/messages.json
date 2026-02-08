@@ -180,5 +180,25 @@
   "settingExtensionDebug": {
     "message": "Extension debug mode",
     "description": "Setting label for enabling extension debug logging"
+  },
+  "labelTheme": {
+    "message": "Theme",
+    "description": "Theme field label"
+  },
+  "themeLight": {
+    "message": "Light",
+    "description": "Light theme label"
+  },
+  "themeDark": {
+    "message": "Dark",
+    "description": "Dark theme label"
+  },
+  "switchToLight": {
+    "message": "Switch to light mode",
+    "description": "Tooltip for switching to light mode"
+  },
+  "switchToDark": {
+    "message": "Switch to dark mode",
+    "description": "Tooltip for switching to dark mode"
   }
 }

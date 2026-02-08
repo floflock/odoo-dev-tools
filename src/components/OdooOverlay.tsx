@@ -35,6 +35,7 @@ export function OdooOverlay({ odooInfo, settings }: OdooOverlayProps) {
   const [activeTab, setActiveTab] = useState<'info' | 'reports'>('info');
   const [switchingLanguage, setSwitchingLanguage] = useState(false);
   const [originalLanguage, setOriginalLanguage] = useState<string | null>(settings.originalLanguage);
+  const [switchingTheme, setSwitchingTheme] = useState(false);
 
   // Apply dark mode class to root container
   useEffect(() => {
@@ -123,6 +124,19 @@ export function OdooOverlay({ odooInfo, settings }: OdooOverlayProps) {
     }
   }, [odooInfo.userId, odooInfo.lang, originalLanguage, switchingLanguage]);
 
+  const toggleTheme = useCallback(async () => {
+    if (!odooInfo.userId || switchingTheme) return;
+
+    const targetScheme = odooInfo.isDarkMode ? 'light' : 'dark';
+    setSwitchingTheme(true);
+    const success = await odooClient.setColorScheme(odooInfo.userId, targetScheme);
+    if (success) {
+      window.location.reload();
+    } else {
+      setSwitchingTheme(false);
+    }
+  }, [odooInfo.userId, odooInfo.isDarkMode, switchingTheme]);
+
   const positionClass = `overlay-${settings.overlayPosition}`;
 
   // Format database display with version
@@ -198,6 +212,13 @@ export function OdooOverlay({ odooInfo, settings }: OdooOverlayProps) {
                     originalLang={originalLanguage}
                     onToggle={toggleLanguage}
                     switching={switchingLanguage}
+                  />
+                )}
+                {odooInfo.userId && (
+                  <ThemeRow
+                    isDarkMode={odooInfo.isDarkMode}
+                    onToggle={toggleTheme}
+                    switching={switchingTheme}
                   />
                 )}
                 <InfoRow
@@ -357,6 +378,35 @@ function LanguageRow({ currentLang, originalLang, onToggle, switching }: Languag
             </button>
           </>
         )}
+      </span>
+    </div>
+  );
+}
+
+interface ThemeRowProps {
+  isDarkMode: boolean;
+  onToggle: () => void;
+  switching: boolean;
+}
+
+function ThemeRow({ isDarkMode, onToggle, switching }: ThemeRowProps) {
+  const currentTheme = isDarkMode ? t('themeDark') : t('themeLight');
+  const targetTheme = isDarkMode ? t('themeLight') : t('themeDark');
+
+  return (
+    <div className="info-row theme-row">
+      <span className="info-label">{t('labelTheme')}:</span>
+      <span className="info-value">
+        {currentTheme}
+        {' → '}
+        <button
+          className="theme-toggle-link"
+          onClick={onToggle}
+          disabled={switching}
+          title={isDarkMode ? t('switchToLight') : t('switchToDark')}
+        >
+          {switching ? '...' : targetTheme}
+        </button>
       </span>
     </div>
   );

@@ -1,6 +1,6 @@
 {
   "name": "odoo-dev-tools",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "Chrome extension with developer tools for Odoo - Debug mode, quick links, reports, and more",
   "type": "module",
   "scripts": {

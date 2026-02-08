@@ -167,6 +167,26 @@ export const odooClient = {
   },
 
   /**
+   * Toggle dark/light mode for a user
+   */
+  async setColorScheme(userId: number, scheme: 'light' | 'dark'): Promise<boolean> {
+    log('Setting color scheme:', { userId, scheme });
+    try {
+      await jsonRpc('/web/dataset/call_kw', {
+        model: 'res.users',
+        method: 'write',
+        args: [[userId], { color_scheme: scheme }],
+        kwargs: {},
+      });
+      log('Color scheme updated successfully');
+      return true;
+    } catch (error) {
+      log('Error setting color scheme:', error);
+      return false;
+    }
+  },
+
+  /**
    * Set user language
    */
   async setUserLanguage(userId: number, lang: string): Promise<boolean> {

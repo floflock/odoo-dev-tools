@@ -234,6 +234,34 @@
       }
     }
   }
+
+  // Theme row with toggle link
+  &.theme-row {
+    cursor: default;
+
+    .theme-toggle-link {
+      margin-left: 4px;
+      padding: 0;
+      background: none;
+      color: var(--odt-primary);
+      border: none;
+      font-size: inherit;
+      font-family: inherit;
+      cursor: pointer;
+      text-decoration: underline;
+      transition: color 0.2s;
+
+      &:hover:not(:disabled) {
+        color: var(--odt-primary-dark);
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        text-decoration: none;
+      }
+    }
+  }
 }
 
 .no-info {
