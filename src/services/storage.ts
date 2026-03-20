@@ -7,6 +7,8 @@ export interface Settings {
   overlayMinimized: boolean;
   originalLanguage: string | null;
   extensionDebug: boolean;
+  posReceiptToPdf: boolean;
+  mockRksvSigning: boolean;
 }
 
 export const defaultSettings: Settings = {
@@ -16,6 +18,8 @@ export const defaultSettings: Settings = {
   overlayMinimized: false,
   originalLanguage: null,
   extensionDebug: false,
+  posReceiptToPdf: false,
+  mockRksvSigning: false,
 };
 
 const SETTINGS_KEY = 'odoo-dev-tools-settings';

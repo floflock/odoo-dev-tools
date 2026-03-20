@@ -200,5 +200,45 @@
   "switchToDark": {
     "message": "Cambiar a modo oscuro",
     "description": "Tooltip for switching to dark mode"
+  },
+  "settingPosReceiptToPdf": {
+    "message": "POS: Recibo a PDF",
+    "description": "Setting label for redirecting POS receipt printing to PDF download"
+  },
+  "posReceiptToPdf": {
+    "message": "Recibo a PDF",
+    "description": "Button text to enable POS receipt-to-PDF override"
+  },
+  "posReceiptToPdfActive": {
+    "message": "Recibo a PDF (Activo)",
+    "description": "Button text when POS receipt-to-PDF override is active"
+  },
+  "posReceiptToPdfTooltip": {
+    "message": "Redirigir la impresión del recibo POS al diálogo de impresión del navegador (guardar como PDF)",
+    "description": "Tooltip for POS receipt-to-PDF button"
+  },
+  "settingMockRksv": {
+    "message": "POS: Mock firma RKSV",
+    "description": "Setting label for mocking Austrian RKSV receipt signing"
+  },
+  "mockRksv": {
+    "message": "Mock RKSV",
+    "description": "Button text to enable RKSV signing mock"
+  },
+  "mockRksvActive": {
+    "message": "Mock RKSV (Activo)",
+    "description": "Button text when RKSV signing mock is active"
+  },
+  "mockRksvTooltip": {
+    "message": "Mock de firma Fiskaly RKSV para recibos (solo localhost)",
+    "description": "Tooltip for RKSV mock button"
+  },
+  "statusActive": {
+    "message": "Activo",
+    "description": "Status label when a feature is active"
+  },
+  "statusInactive": {
+    "message": "Inactivo",
+    "description": "Status label when a feature is inactive"
   }
 }

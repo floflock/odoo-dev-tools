@@ -97,6 +97,24 @@ export function Popup() {
           </div>
 
           <div className="setting-item">
+            <span className="setting-label">{t('settingPosReceiptToPdf')}</span>
+            <ToggleSwitch
+              id="posReceiptToPdf"
+              checked={settings.posReceiptToPdf}
+              onChange={(checked) => updateSetting('posReceiptToPdf', checked)}
+            />
+          </div>
+
+          <div className="setting-item">
+            <span className="setting-label">{t('settingMockRksv')}</span>
+            <ToggleSwitch
+              id="mockRksvSigning"
+              checked={settings.mockRksvSigning}
+              onChange={(checked) => updateSetting('mockRksvSigning', checked)}
+            />
+          </div>
+
+          <div className="setting-item">
             <span className="setting-label">{t('settingExtensionDebug')}</span>
             <ToggleSwitch
               id="extensionDebug"
@@ -107,7 +125,7 @@ export function Popup() {
         </div>
 
         <div className="info-section">
-          <p className="version">v1.2.0</p>
+          <p className="version">v1.4.0</p>
         </div>
       </div>
     </div>

@@ -200,5 +200,45 @@
   "switchToDark": {
     "message": "Passer en mode sombre",
     "description": "Tooltip for switching to dark mode"
+  },
+  "settingPosReceiptToPdf": {
+    "message": "POS : Ticket en PDF",
+    "description": "Setting label for redirecting POS receipt printing to PDF download"
+  },
+  "posReceiptToPdf": {
+    "message": "Ticket en PDF",
+    "description": "Button text to enable POS receipt-to-PDF override"
+  },
+  "posReceiptToPdfActive": {
+    "message": "Ticket en PDF (Actif)",
+    "description": "Button text when POS receipt-to-PDF override is active"
+  },
+  "posReceiptToPdfTooltip": {
+    "message": "Rediriger l'impression du ticket POS vers le dialogue d'impression du navigateur (enregistrer en PDF)",
+    "description": "Tooltip for POS receipt-to-PDF button"
+  },
+  "settingMockRksv": {
+    "message": "POS : Mock signature RKSV",
+    "description": "Setting label for mocking Austrian RKSV receipt signing"
+  },
+  "mockRksv": {
+    "message": "Mock RKSV",
+    "description": "Button text to enable RKSV signing mock"
+  },
+  "mockRksvActive": {
+    "message": "Mock RKSV (Actif)",
+    "description": "Button text when RKSV signing mock is active"
+  },
+  "mockRksvTooltip": {
+    "message": "Mock de la signature Fiskaly RKSV pour les tickets (localhost uniquement)",
+    "description": "Tooltip for RKSV mock button"
+  },
+  "statusActive": {
+    "message": "Actif",
+    "description": "Status label when a feature is active"
+  },
+  "statusInactive": {
+    "message": "Inactif",
+    "description": "Status label when a feature is inactive"
   }
 }

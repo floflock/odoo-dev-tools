@@ -1,5 +1,6 @@
 export interface OdooInfo {
   isOdoo: boolean;
+  isPOS: boolean;
   version: number | null;
   serverVersion: string | null;
   database: string | null;
@@ -150,6 +151,7 @@ export async function detectOdoo(): Promise<OdooInfo> {
 
   const info: OdooInfo = {
     isOdoo: false,
+    isPOS: false,
     version: null,
     serverVersion: null,
     database: null,
@@ -196,10 +198,17 @@ export async function detectOdoo(): Promise<OdooInfo> {
     return info;
   }
 
-  // Only show on Odoo web client (backend), not on website/portal pages
+  // Detect POS pages (URL contains /pos/ui)
+  const isPOSPage = /\/pos\/ui\b/.test(window.location.pathname);
+  if (isPOSPage) {
+    info.isPOS = true;
+    log('POS page detected');
+  }
+
+  // Only show on Odoo web client (backend) or POS pages, not on website/portal pages
   const isWebClient = document.body.classList.contains('o_web_client');
-  if (!isWebClient) {
-    log('Odoo detected but not web client (portal/website page), exiting');
+  if (!isWebClient && !isPOSPage) {
+    log('Odoo detected but not web client or POS (portal/website page), exiting');
     info.isOdoo = false;
     return info;
   }

@@ -26,6 +26,7 @@ import type { OdooInfo } from '../src/utils/odoo-detector';
 // Global state
 let overlayRoot: ReturnType<typeof createRoot> | null = null;
 let currentOdooInfo: OdooInfo | null = null;
+let posDebugBadgesObserver: MutationObserver | null = null;
 
 // Install RPC interceptor in page context (bypasses CSP)
 function installRpcInterceptor() {
@@ -63,6 +64,46 @@ function setupRpcListener(settings: Awaited<ReturnType<typeof storage.getSetting
   });
 
   log('RPC listener setup complete');
+}
+
+// Inject status badges into the POS debug widget's badge row
+function injectPosDebugBadges(settings: Awaited<ReturnType<typeof storage.getSettings>>) {
+  const badgeRow = document.querySelector('.debug-widget > .d-flex.gap-1.mb-2');
+  if (!badgeRow) return;
+
+  // Remove any previously injected badges
+  badgeRow.querySelectorAll('.odt-pos-badge').forEach(el => el.remove());
+
+  const features = [
+    { key: 'posReceiptToPdf', label: 'Receipt → PDF', active: settings.posReceiptToPdf },
+    { key: 'mockRksvSigning', label: 'Mock RKSV', active: settings.mockRksvSigning },
+  ];
+
+  for (const feature of features) {
+    const badge = document.createElement('span');
+    badge.className = `badge rounded odt-pos-badge ${feature.active ? 'bg-success' : 'bg-secondary'}`;
+    badge.textContent = `${feature.label}: ${feature.active ? 'ON' : 'OFF'}`;
+    badge.style.opacity = feature.active ? '1' : '0.6';
+    badgeRow.appendChild(badge);
+  }
+
+  log('POS debug widget badges injected');
+}
+
+// Watch for the debug widget to appear/reappear and inject badges
+function setupPosDebugBadges(settings: Awaited<ReturnType<typeof storage.getSettings>>) {
+  // Try immediately
+  injectPosDebugBadges(settings);
+
+  // Observe DOM for debug widget appearing (it toggles visibility)
+  posDebugBadgesObserver = new MutationObserver(() => {
+    const badgeRow = document.querySelector('.debug-widget > .d-flex.gap-1.mb-2');
+    if (badgeRow && !badgeRow.querySelector('.odt-pos-badge')) {
+      injectPosDebugBadges(settings);
+    }
+  });
+
+  posDebugBadgesObserver.observe(document.body, { childList: true, subtree: true });
 }
 
 export default defineContentScript({
@@ -107,6 +148,20 @@ export default defineContentScript({
 
     currentOdooInfo = odooInfo;
 
+    // POS localhost features
+    if (odooInfo.isPOS && odooInfo.isLocalhost) {
+      if (settings.posReceiptToPdf) {
+        log('POS page detected with receipt-to-PDF enabled, activating override...');
+        window.dispatchEvent(new CustomEvent('odoo-dev-tools-pos-receipt-pdf'));
+      }
+      if (settings.mockRksvSigning) {
+        log('POS page detected with RKSV mock enabled, activating...');
+        window.dispatchEvent(new CustomEvent('odoo-dev-tools-mock-rksv', { detail: { enabled: true } }));
+      }
+      // Inject status badges into the POS debug widget
+      setupPosDebugBadges(settings);
+    }
+
     // Auto-enable debug mode if configured
     if (settings.autoDebug && !odooInfo.debugMode) {
       log('Auto-enabling debug mode');
@@ -116,8 +171,8 @@ export default defineContentScript({
       return;
     }
 
-    // Show overlay if enabled
-    if (settings.showOverlay) {
+    // Show overlay if enabled (not on POS pages — POS uses debug widget badges instead)
+    if (settings.showOverlay && !odooInfo.isPOS) {
       log('Rendering overlay...');
 
       let container = document.getElementById('odoo-dev-tools-root');
@@ -142,6 +197,21 @@ export default defineContentScript({
         setDebugEnabled(newSettings.extensionDebug);
 
         log('Settings changed, updating overlay');
+
+        // Activate POS receipt override if setting was just enabled on a localhost POS page
+        if (currentOdooInfo?.isPOS && currentOdooInfo?.isLocalhost && newSettings.posReceiptToPdf) {
+          log('POS receipt-to-PDF setting enabled, activating override...');
+          window.dispatchEvent(new CustomEvent('odoo-dev-tools-pos-receipt-pdf'));
+        }
+
+        // Activate/deactivate RKSV mock if setting changed on a localhost POS page
+        if (currentOdooInfo?.isPOS && currentOdooInfo?.isLocalhost) {
+          window.dispatchEvent(new CustomEvent('odoo-dev-tools-mock-rksv', {
+            detail: { enabled: newSettings.mockRksvSigning }
+          }));
+          // Update debug widget badges
+          injectPosDebugBadges(newSettings);
+        }
 
         // Re-render overlay with new settings
         if (overlayRoot && newSettings.showOverlay && currentOdooInfo) {

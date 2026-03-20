@@ -200,5 +200,45 @@
   "switchToDark": {
     "message": "Zum dunklen Modus wechseln",
     "description": "Tooltip for switching to dark mode"
+  },
+  "settingPosReceiptToPdf": {
+    "message": "POS: Beleg als PDF",
+    "description": "Setting label for redirecting POS receipt printing to PDF download"
+  },
+  "posReceiptToPdf": {
+    "message": "Beleg als PDF",
+    "description": "Button text to enable POS receipt-to-PDF override"
+  },
+  "posReceiptToPdfActive": {
+    "message": "Beleg als PDF (Aktiv)",
+    "description": "Button text when POS receipt-to-PDF override is active"
+  },
+  "posReceiptToPdfTooltip": {
+    "message": "POS-Belegdruck zum Browser-Druckdialog umleiten (als PDF speichern)",
+    "description": "Tooltip for POS receipt-to-PDF button"
+  },
+  "settingMockRksv": {
+    "message": "POS: RKSV-Signierung mocken",
+    "description": "Setting label for mocking Austrian RKSV receipt signing"
+  },
+  "mockRksv": {
+    "message": "RKSV mocken",
+    "description": "Button text to enable RKSV signing mock"
+  },
+  "mockRksvActive": {
+    "message": "RKSV mocken (Aktiv)",
+    "description": "Button text when RKSV signing mock is active"
+  },
+  "mockRksvTooltip": {
+    "message": "Fiskaly RKSV-Belegsignierung mocken (nur localhost)",
+    "description": "Tooltip for RKSV mock button"
+  },
+  "statusActive": {
+    "message": "Aktiv",
+    "description": "Status label when a feature is active"
+  },
+  "statusInactive": {
+    "message": "Inaktiv",
+    "description": "Status label when a feature is inactive"
   }
 }

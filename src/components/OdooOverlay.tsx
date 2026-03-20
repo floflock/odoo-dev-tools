@@ -36,7 +36,6 @@ export function OdooOverlay({ odooInfo, settings }: OdooOverlayProps) {
   const [switchingLanguage, setSwitchingLanguage] = useState(false);
   const [originalLanguage, setOriginalLanguage] = useState<string | null>(settings.originalLanguage);
   const [switchingTheme, setSwitchingTheme] = useState(false);
-
   // Apply dark mode class to root container
   useEffect(() => {
     const root = document.getElementById('odoo-dev-tools-root');
